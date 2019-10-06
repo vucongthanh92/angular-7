@@ -1,0 +1,9 @@
+<div class="dx-fieldset">
+  <div class="dx-field">
+    <div class="dx-field-label">Workstation</div>
+    <div class="dx-field-value">
+      <dx-select-box [items]='workstations' [(value)]="workstationID" displayExpr="name" valueExpr="id"
+        (onSelectionChanged)="onSelectionChanged()"></dx-select-box>
+    </div>
+  </div>
+</div>

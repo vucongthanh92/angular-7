@@ -1,0 +1,21 @@
+<div class="dx-fieldset">
+  <div class="dx-field">
+    <div class="dx-field-label">Customer</div>
+    <div class="dx-field-value" id="customerDiv">
+      <dx-text-box [placeholder]="placeholder" [(value)]="valueSearch" (onValueChanged)="onValueChanged()">
+      </dx-text-box>
+      <dx-button icon="fieldchooser" class="customer-type-button" modes="text" type="normal"
+        (onClick)="customerDivVisible = true">
+      </dx-button>
+
+      <dx-popup [showTitle]="false" [closeOnOutsideClick]="true" [width]="'auto'" [height]="'auto'"
+        [(visible)]="customerDivVisible" [position]="{ my: 'top', at: 'bottom', of: '#customerDiv'}">
+        <a class="dropdown-item" (click)="customerFilter('btid', 'Customer code')">Customer code</a>
+        <a class="dropdown-item" (click)="customerFilter('btfirstname', 'First name')">First name</a>
+        <a class="dropdown-item" (click)="customerFilter('btlastname', 'Last name')">Last name</a>
+        <a class="dropdown-item" (click)="customerFilter('btprimaryphoneno', 'Mobile')">Mobile</a>
+        <a class="dropdown-item" (click)="customerFilter('btemail', 'Email')">Email</a>
+      </dx-popup>
+    </div>
+  </div>
+</div>

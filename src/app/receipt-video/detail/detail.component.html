@@ -1,0 +1,26 @@
+<div class="title">
+  <h4>Receipt #</h4>
+  <div *ngIf="selectedReceipt" class="detail-receipt-number">{{selectedReceipt.no}}</div>
+  <div class="detail-receipt-live">
+    <i (click)="showLiveCamera()" class="fa fa-eye" aria-hidden="true"></i>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="selectedReceipt">
+  <div class="row search-response videos-receipt">
+    <div class="col-md-12">
+      <p>Customer Name:</p>
+      <span>{{ selectedReceipt.fullname ? selectedReceipt.fullname : 'N/A' }}</span>
+    </div>
+    <div class="col-md-6">
+      <p>Start Date Time:</p>
+      <span>{{selectedReceipt.start | date: 'MM/dd/yyyy HH:mm:ss'}}</span>
+    </div>
+    <div class="col-md-6">
+      <p>End Date Time:</p>
+      <span>{{selectedReceipt.end | date: 'MM/dd/yyyy HH:mm:ss'}}</span>
+    </div>
+  </div>
+</div>
+
+<app-livecam [popupLiveCam]="popupLiveCam" (close)="hideLiveCamera($event)"></app-livecam>

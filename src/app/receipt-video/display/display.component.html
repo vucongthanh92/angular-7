@@ -1,0 +1,46 @@
+<div class="receipt-videos-contain">
+  <div class="receipt-videos">
+    <img *ngIf="currentImage" class="receipt-videos-screen" [src]="currentImage.path"
+      onError="this.src='assets/img/video-error.jpg'" [ngClass]="showNavigator ? '' : 'showLoadingIcon'" />
+  </div>
+  <div class="row" *ngIf="showNavigator">
+    <div class="col-12">
+      <ng5-slider [(value)]="valueSlider" [options]="optionSlider" (valueChange)="changeValueSlider($event)"
+        [manualRefresh]="refreshSlider" tabindex="-1"></ng5-slider>
+    </div>
+    <div class="col-12">
+      <app-timeline [speedVideo]=[speedVideo] [unixRunTimeVideo]='unixRunTimeVideo' [totalTimeReceipt]='totalTimeReceipt'>
+      </app-timeline>
+    </div>
+  </div>
+
+  <div class="row ml-1 mr-1 mt-2" *ngIf="showNavigator">
+    <a class="col cam-bt" (click)="onSpeedDown()" title="Speed Down">
+      <i class="fa fa-fast-backward" aria-hidden="true"></i>
+    </a>
+    <a class="col cam-bt" (click)="onBackward()" title="Backward">
+      <i class="fa fa-step-backward" aria-hidden="true"></i>
+    </a>
+    <a class="col cam-bt" (click)="onStop()" [ngClass]="activeButton === 'onStop' ? 'onActive' : '' " title="Stop">
+      <i class="fa fa-stop" aria-hidden="true"></i>
+    </a>
+    <a class="col cam-bt" (click)="onPlay()" [ngClass]="activeButton === 'onPlay' ? 'onActive' : '' " title="Play">
+      <i class="fa fa-play" aria-hidden="true"></i>
+    </a>
+    <a class="col cam-bt" (click)="onPause()" [ngClass]="activeButton === 'onPause' ? 'onActive' : '' " title="Pause">
+      <i class="fa fa-pause" aria-hidden="true"></i>
+    </a>
+    <a class="col cam-bt" (click)="onForward()" title="Forward">
+      <i class="fa fa-step-forward" aria-hidden="true"></i>
+    </a>
+    <a class="col cam-bt" (click)="onSpeedUp()" title="Speed Up">
+      <i class="fa fa-fast-forward" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>
+
+<app-message [showNavigator]='showNavigator'></app-message>
+
+<div *ngIf="listImages.length > 0" (deferLoad)="showNavigator = true" class="loading-images-defer">
+  <img *ngFor="let img of listImages" [src]="img.path" />
+</div>

@@ -1,0 +1,108 @@
+<dx-popup id="settings" [showTitle]="true" title="Setting" [closeOnBackButton]="true" [closeOnOutsideClick]="true"
+  [width]="750" [height]="600" [showCloseButton]="true" [(visible)]="statusPopup" [resizeEnabled]="false"
+  (onHiding)="onHiding()">
+  <div *ngIf="setting" class="search-block">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">Setting ID</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [disabled]="true" [(value)]="setting.SettingId"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">Store Code</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [(value)]="setting.StoreCode"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">POS</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [(value)]="setting.Pos"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">Camera Name</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [(value)]="setting.CameraName"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">FTP Folder</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [(value)]="setting.CameraFtpFolder"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">Camera IP</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [(value)]="setting.CameraIp"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">Time Zone Offset</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [(value)]="setting.TimeZoneOffset"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">Time Zone</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [(value)]="setting.TimeZone"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label text-secondary">Position</div>
+              <div class="dx-field-value margin-bottom-25">
+                <dx-text-box [(value)]="setting.Position"></dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="setting-position-bottom">
+    <button (click)="clickUpdateBtn()" class="btn btn-primary btn-lg setting-button-edit">Save</button>
+  </div>
+</dx-popup>
+
+<dx-popup [closeOnBackButton]="true" [closeOnOutsideClick]="true" [width]="400" [height]="150" [showCloseButton]="true"
+  [(visible)]="notify" [resizeEnabled]="false">
+  <h3 class="text-center">{{ error }}</h3>
+</dx-popup>

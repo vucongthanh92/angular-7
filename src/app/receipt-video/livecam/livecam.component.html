@@ -1,0 +1,7 @@
+<dx-popup id="settings" [showTitle]="true" title="Live Camera" [closeOnBackButton]="true" [closeOnOutsideClick]="true"
+  [width]="750" [height]="512" [showCloseButton]="true" [(visible)]="popupLiveCam" [resizeEnabled]="false"
+  (onHiding)="onHiding()">
+  <div>
+    <img name="main" id="main" width="100%" height="400" src="http://192.168.1.90/mjpg/video.mjpg">
+  </div>
+</dx-popup>

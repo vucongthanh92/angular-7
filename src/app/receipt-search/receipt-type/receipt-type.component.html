@@ -1,0 +1,10 @@
+<div class="dx-fieldset">
+  <div class="dx-field">
+    <div class="dx-field-label">Document Type</div>
+    <div class="dx-field-value">
+      <dx-select-box [items]='receiptTypeList' [(value)]='receiptType' (onSelectionChanged)="onSelectionChanged()"
+        displayExpr="text" valueExpr="id">
+      </dx-select-box>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="container-fluid header">
+  <header>
+    <a class="logo">Live Receipt</a>
+    <div>
+      <a class="search-icon" [hidden]="isSearch" (click)="isSearch = !isSearch" title="Expand Search"><i
+          class="fa fa-search" aria-hidden="true"></i></a>
+      <a (click)="showSetting()" class="setting" title="Open Setting">
+        <i class="fa fa-cog" aria-hidden="true"></i>
+      </a>
+      <a class="avatar">
+        <i class="fa fa-user-secret" aria-hidden="true"></i>
+        <ul class="sub-menu">
+          <li (click)="logout()">Logout</li>
+        </ul>
+      </a>
+    </div>
+  </header>
+</div>
+
+<app-setting [popupSetting]="popupSetting" (close)="hideSetting($event)"></app-setting>
+
+<div class="search-block bg-gray" [ngClass]="isSearch ? 'search-open' : null ">
+  <div class="panel-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col padding-x-10">
+          <app-store (chooseStore)="searchParams.store = $event" [clearAllSearch]='clearAllSearch'></app-store>
+          <app-workstation [clearAllSearch]='clearAllSearch' (sendWorkstation)="searchParams.workstation = $event">
+          </app-workstation>
+        </div>
+        <div class="col padding-x-10">
+          <app-date [clearAllSearch]='clearAllSearch' (chooseDateTime)="searchParams.date = $event"></app-date>
+        </div>
+        <div class="col padding-x-10">
+          <app-receipt-number [clearAllSearch]='clearAllSearch'
+            (sendReceiptNumber)="searchParams.receiptNumber = $event"></app-receipt-number>
+          <app-cashier (getCashier)="searchParams.cashier = $event" [clearAllSearch]='clearAllSearch'></app-cashier>
+        </div>
+        <div class="col padding-x-10">
+          <app-customer [clearAllSearch]='clearAllSearch' (getCustomer)="searchParams.customer = $event"></app-customer>
+          <app-receipt-type [clearAllSearch]='clearAllSearch' (sendReceiptType)="searchParams.receiptType = $event">
+          </app-receipt-type>
+        </div>
+        <div class="col padding-x-10 position-relative">
+          <app-refund [clearAllSearch]='clearAllSearch' (sendRefund)="searchParams.refund = $event"
+            [ngClass]="searchParams.receiptType === '1' ? null : 'disabledClick'"></app-refund>
+          <button class="cam-bt search" (click)="clickSearchButton()" [disabled]="loadding">Search</button>
+          <button class="cam-bt clear" (click)="clickClearButton()">Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="close" (click)="isSearch = false" title="Collapse Panels">x</a>
+</div>
+
+<div class="container-fluid wrapper" [ngClass]="isSearch ? 'search-open' : null ">
+  <div class="receipt-list cam-block col" [ngClass]="receiptPanel === '0' ? 'close' : null ">
+    <a class=" close-panel" (click)="changeReceiptPanel()" [title]="receiptPanel ? 'Expand Panels' : 'Collapse Panels'">
+      <i *ngIf="receiptPanel === '0'" class="fa fa-angle-double-right" aria-hidden="true"></i>
+      <i *ngIf="receiptPanel === '1'" class="fa fa-angle-double-left" aria-hidden="true"></i>
+    </a>
+    <div [hidden]="receiptPanel === '0'" class="panel-content">
+      <app-receipt-list style="height: 100%;display: block" [listReceipt]='listReceipt'
+        (chooseReceipt)='getSelectedReceipt($event)'></app-receipt-list>
+    </div>
+  </div>
+  <div class="videos-block cam-block col">
+    <div class="panel-content">
+      <app-detail [selectedReceipt]='selectedReceipt'></app-detail>
+      <app-display [selectedReceipt]='selectedReceipt' [selectedItem]='selectedItem' [itemPanel]='itemPanel'
+        [receiptPanel]='receiptPanel' (objCurrentVideo)="objCurrentVideo = $event"></app-display>
+    </div>
+  </div>
+  <div class="receipt-block cam-block col" [ngClass]="itemPanel === '0' ? 'close' : null ">
+    <a class="close-panel" (click)="changeItemPanel()" [title]="itemPanel ? 'Expand Panels' : 'Collapse Panels'">
+      <i *ngIf="itemPanel === '0'" class="fa fa-angle-double-right" aria-hidden="true"></i>
+      <i *ngIf="itemPanel === '1'" class="fa fa-angle-double-left" aria-hidden="true"></i>
+    </a>
+    <div [hidden]="itemPanel === '0'" class="panel-content">
+      <app-items [selectedReceipt]='selectedReceipt' [objCurrentVideo]='objCurrentVideo'
+        (selectedItem)='getSelectedItem($event)'></app-items>
+    </div>
+  </div>
+</div>
+
+<dx-load-panel [closeOnOutsideClick]="false" [(visible)]="loadding">
+</dx-load-panel>

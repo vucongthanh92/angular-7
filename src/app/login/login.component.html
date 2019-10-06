@@ -1,0 +1,22 @@
+<div class="login-page">
+  <dx-form class="login-block" [formData]="loginForm" [width]="500">
+    <dxi-item itemType="group">
+      <h2 class="text-center">Login</h2>
+    </dxi-item>
+    <dxi-item itemType="group">
+      <dxi-item dataField="Username"></dxi-item>
+      <dxi-item dataField="Password" [editorOptions]="{ mode: 'password' }"></dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group" class="text-center">
+      <p *ngIf="loginError !== ''" class="login-error-message">
+        {{ loginError }}
+      </p>
+      <dx-button modes="contained" type="default" (onClick)="login()" text="Login"></dx-button>
+    </dxi-item>
+  </dx-form>
+</div>
+
+<dx-load-panel
+    [closeOnOutsideClick]="false"
+    [(visible)]="isLoadPanelVisible">
+</dx-load-panel>

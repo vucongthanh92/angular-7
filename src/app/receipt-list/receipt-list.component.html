@@ -1,0 +1,46 @@
+<div class="title">
+  <h4>Receipts List</h4>
+  <div *ngIf="listReceipt.length > 0" class="list-receipt-filter">
+    <dx-text-box [(value)]="receiptNumber" valueChangeEvent="keyup" (onValueChanged)="filterReceipt('no')"
+      placeholder="Receipt #"></dx-text-box>
+  </div>
+</div>
+
+<div *ngIf="displayReceipt.length > 0; else nodata" class="search-response">
+  <ul class="ul-receipt-list">
+    <li *ngFor="let receipt of displayReceipt | paginate: { itemsPerPage: 5, currentPage: p }" class="sid"
+      (click)="clickReceipt(receipt)" [ngClass]="activeClicked === receipt.id ? 'activeClicked' : '' ">
+      <div class="row">
+        <div class="col-md-4">
+          <p>Number #</p>
+          <span>{{ receipt.no }}</span>
+        </div>
+        <div class="col-md-4">
+          <p>Store</p>
+          <span>{{receipt.storeName}}</span>
+        </div>
+        <div class="col-md-4">
+          <p>Total</p>
+          <span>{{ receipt.total | currency : 'USD' : 'symbol' : '1.0' }}</span>
+        </div>
+        <div class="col-md-4">
+          <p>Date Time</p>
+          <span class="postdate">{{ receipt.start | date:'MM/dd/yyyy HH:mm:ss' }}</span>
+        </div>
+        <div class="col-md-4">
+          <p>Workstation</p>
+          <span>{{ receipt.posName }}</span>
+        </div>
+        <div class="col-md-4">
+          <p>Receipt Type</p>
+          <span>{{ receipt.type }}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <pagination-controls class="receipt-pagination" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<ng-template #nodata>
+  <div class="receipt-nodata">No Data</div>
+</ng-template>

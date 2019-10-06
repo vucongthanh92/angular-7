@@ -1,0 +1,9 @@
+<div class="dx-fieldset">
+  <div class="dx-field">
+    <div class="dx-field-label">Store</div>
+    <div *ngIf='listStores' class="dx-field-value">
+      <dx-select-box [items]='listStores' [(value)]="storeSID" displayExpr="storename" valueExpr="sid"
+        (onSelectionChanged)="onSelectionChanged()"></dx-select-box>
+    </div>
+  </div>
+</div>

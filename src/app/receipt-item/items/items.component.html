@@ -1,0 +1,75 @@
+<div class="title">
+  <h4>Receipt Items</h4>
+</div>
+
+<div *ngIf="receiptItem.length > 0; else nodata" class="ul-receipt-item" #scrollReceiptItem (scroll)="onScroll()">
+  <ng-container *ngFor="let item of receiptItem | sort:'unixTime'">
+    <div *ngIf="item.status === 1" class="receipt-item-container">
+      <div (click)="clickReceiptItem(item.unixTime, item.frame )" [class.borderchecked]="checkedItem == item.unixTime"
+        class="dx-fieldset detail-receipt list-receipt-item receipt-item-type-{{ item.itemtype }}">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="receipt-item-title">Item Code</div>
+              <span class="list-receipt-sid">{{ item.id }}</span>
+            </div>
+            <div class="col-md-4">
+              <div class="receipt-item-title">Quantity</div>
+              <span class="list-receipt-qty">{{ item.quantity }}</span>
+            </div>
+            <div class="col-md-4">
+              <div class="receipt-item-title">Price</div>
+              <span class="list-receipt-sale">{{ item.price | currency : 'USD' : 'symbol' : '1.0' }}</span>
+            </div>
+            <div class="col-md-4">
+              <div class="receipt-item-title">Description</div>
+              <span class="list-receipt-description">{{ item.description }}</span>
+            </div>
+            <div class="col-md-4">
+              <div class="receipt-item-title">Time</div>
+              <span class="list-receipt-description">{{ item.startTime | date:'HH:mm:ss' }}</span>
+            </div>
+            <div class="col-md-4">
+              <div class="receipt-item-title">Type</div>
+              <span class="list-receipt-sale" [ngSwitch]="item.itemtype">
+                <span *ngSwitchCase="1">Sale</span>
+                <span *ngSwitchCase="2">Return</span>
+                <span *ngSwitchCase="5">Voice</span>
+                <span *ngSwitchDefault>None</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="receiptItem.length > 0 && objCurrentVideo.time" class="dx-fieldset detail-receipt total-item bg-info">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">Total Item</div>
+            <div class="col-md-6 text-right">{{ totalItem }}</div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">Total Quantity</div>
+            <div class="col-md-6 text-right">{{ totalQuantity }}</div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">Total Amount</div>
+            <div class="col-md-6 text-right">{{ totalAmount | currency : 'USD' : 'symbol' : '1.0' }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nodata>
+  <div class="receipt-nodata">No Data</div>
+</ng-template>
